@@ -1,0 +1,120 @@
+html {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; }
+
+*, *:after, *:before {
+  box-sizing: inherit; }
+
+body {
+  width: 100%;
+  height: 100%;
+  background: #6d6d6d;
+  margin: 0;
+  padding: 0; }
+
+.input-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; }
+  .input-icon .icon-container {
+    background: black;
+    color: white;
+    height: 52px;
+    padding: 10px 16px; }
+  .input-icon .input-container {
+    width: 100%;
+    height: auto; }
+    .input-icon .input-container input {
+      background: #373737;
+      color: white;
+      padding: 14px;
+      border: none;
+      outline: none;
+      width: 100%;
+      height: auto; }
+
+.login {
+  width: 100%;
+  height: calc(100% - 240px);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .login .login-container {
+    position: relative;
+    background: #b4b4b4;
+    padding: 60px;
+    border-radius: 26px;
+    margin-bottom: 20px;
+    width: 450px;
+    height: auto; }
+    .login .login-container .logo {
+      position: absolute;
+      top: -70px;
+      left: calc(50% - 140px / 2);
+      background: black;
+      border-radius: 100%; }
+      .login .login-container .logo img {
+        width: 140px;
+        height: 140px;
+        border-radius: 100%; }
+    .login .login-container .form {
+      margin-top: 50px;
+      margin-bottom: 40px; }
+      .login .login-container .form .input-icon {
+        margin-bottom: 16px; }
+  .login .login-button {
+    text-align: center; }
+  .login .login-button button,
+  .login .login-button input[type=submit] {
+    width: 300px;
+    padding: 8px 60px;
+    font-size: 24px;
+    color: black;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    background: #b4b4b4;
+    cursor: pointer;
+    -webkit-transition: 0.3s;
+    transition: 0.3s; }
+    .login .login-button button:hover,
+    .login .login-button input[type=submit]:hover {
+      background: #373737;
+      color: white; }
+
+@media screen and (max-width: calc(450px + 40px)) {
+  .login {
+    width: 100%;
+    height: calc(100% - 370px); }
+    .login .login-container {
+      width: calc(100% - 40px);
+      margin-left: 20px;
+      margin-right: 20px; }
+      .login .login-container .logo {
+        top: -60px;
+        left: calc(50% - 120px / 2); }
+        .login .login-container .logo img {
+          width: 120px;
+          height: 120px; }
+      .login .login-container .form {
+        margin-top: 40px;
+        margin-bottom: 0px; }
+    .login .login-button {
+      width: 100%; }
+      .login .login-button button,
+      .login .login-button input[type=submit] {
+        width: calc(100% - 80px);
+        padding: 8px 0px;
+        font-size: 22px;
+        margin-left: 40px;
+        margin-right: 40px; }
+  .input-icon .icon-container {
+    height: 48px;
+    padding: 6px 7px; }
+  .input-icon .input-container input {
+    padding: 12px; } }

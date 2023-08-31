@@ -1,0 +1,32 @@
+{% extends "base.html.jinja" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    {{ super() }} login
+{% endblock title %}
+
+{% block head %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+{% endblock head %}
+
+{% block content %}
+    <div class="center-vertical>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 shadow-box largo-65">
+                    <img src="{{ url_for('static', filename='images/newLogo.jpg') }}" class="img-responsive center-block" id="logo" alt="Logo">
+                    {{ super() }}
+                    {# {{ wtf.quick_form(login_form) }} #}
+                    <form action="{{ url_for('auth.login') }}" method="post">
+                        <div class="form-group" id="login">
+                            {{login_form.csrf_token}}
+                            {{login_form.username()}}
+                            {{login_form.password()}}
+                            {{login_form.submit()}}
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

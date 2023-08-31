@@ -1,0 +1,27 @@
+al hacer login lo mas seguro es que tenga que hacer click en visor tributario para que se activen las cookies por primera vez, ya despues podré usar el link de abajo
+
+url directo al buscador -> https://rfcampe.siat.sat.gob.mx/app/PE/IdcSiat/SACVisorTributario/SACBusquedaVisorTributario.jsf
+posible funcion directa, una vez que se busca a una persona -> PrimeFaces.ab({source:'visorForm:tablaResultados:0:j_idt62',global:false,params:[{name:'rowIdx',value:'0'}]});
+
+
+fetch("https://rfcampe.siat.sat.gob.mx/app/PE/IdcSiat/IdcGeneraConstancia.jsf").then( async res => {
+    const blob = await res.blob();
+    const newBlob = new Blob([blob]);
+
+    const blobUrl = window.URL.createObjectURL(newBlob);
+
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.setAttribute('download', `hola.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+
+    // clean up Url
+    window.URL.revokeObjectURL(blobUrl);
+    
+} )
+				session
+F5-PROD-SIAT-AUTH-443 !uIoMCe/Kxklus7SEEaRcDiaLeoUD2mjetTwVfE8DEquGy9QlLHs0I3aDO+kpKHIiGcMOWpgyfyyb
+UrnNovellNidpClusterMemberId ~03~02fbf~1B~1A~1F~7B~7C
+JSESSIONID BD6088F585EBCBC773D6F248FD41787E

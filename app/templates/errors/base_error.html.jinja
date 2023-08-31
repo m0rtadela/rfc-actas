@@ -1,0 +1,20 @@
+{% extends "base.html.jinja" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock head %}
+
+{% block content %}
+    <div class="center-vertical">
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3 shadow-box error">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='images/LOGO.png') }}" class="img-responsive center-block" id="logo" alt="Logo">
+                </a>
+                <h1>{{error_code}}</h1>
+                <p>{{error_message}}</p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

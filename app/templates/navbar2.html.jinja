@@ -1,0 +1,63 @@
+<div class="area"></div>
+<nav class="main-menu">
+    <ul>
+        {# <li class="has-subnav">
+            <a href="{{ url_for('sat.login') }}">
+                <i class="fa-sharp fa-solid fa-right-to-bracket fa fa-2x"></i>
+                <span class="nav-text">
+                    Inicia sesión
+                </span>
+            </a>
+
+        </li> #}
+        {% if current_user.role == "admin" %}
+            <li class="has-subnav">
+                <a href="{{ url_for('admin.create_usr') }}">
+                    <i class="fa-sharp fa-solid fa-users fa fa-2x "></i>
+                    <span class="nav-text">
+                        Maneja usuarios
+                    </span>
+                </a>
+            </li>
+        {% endif %}
+        <li class="has-subnav">
+            <a href="{{ url_for('sat.request_constancia') }}">
+                <i class="fa-sharp fa-solid fa-pen fa fa-2x"></i>
+                <span class="nav-text">
+                    Solicita constancia
+                </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="{{ url_for('sat.request_constancia_csv') }}">
+                <i class="fa-sharp fa-solid fa-layer-group fa fa-2x"></i>
+                <span class="nav-text">
+                    Solicita constancias
+                </span>
+            </a>
+
+        </li>
+        <li>
+            <a href="{{ url_for('sat.my_constancias') }}">
+                <i class="fa-sharp fa-solid fa-file-invoice fa fa-2x"></i>
+                <span class="nav-text">
+                    Constancias
+                </span>
+            </a>
+        </li>
+        
+    </ul>
+
+    <ul class="logout">
+        <li>
+            <a href="{{ url_for('auth.logout') }}">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                    Logout
+                    {{ current_user.username }}
+                </span>
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,29 @@
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('sat.login') }}">
+                <img src="{{ url_for('static', filename='images/LOGO.png') }}" style="max-width: 48px"
+                    alt="Logo">
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('sat.login') }}">Inicio</a></li>
+                <li><a href="{{ url_for('admin.create_usr') }}"> Usuarios </a></li>
+                <li><a href="{{ url_for('sat.request_constancia') }}"> Constancias </a></li>
+                <li><a href="{{ url_for('sat.request_constancia_csv') }}"> Muchas Constancias </a></li>
+                <li><a href="{{ url_for('sat.my_constancias') }}"> Mis Constancias </a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('auth.logout') }}">Log out {{ usuario }}</a></li>                
+                {% endif %}                
+            </ul>
+        </div>
+    </div>
+</div>
+

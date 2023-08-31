@@ -1,0 +1,144 @@
+{% extends "base-new.html.jinja" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    {{ super() }} Constancia
+{% endblock title %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock head %}
+
+{% block content %}
+    {{ super() }}
+    <div class="constancias">
+        <div class="constancias-container">
+            <div class="header">
+                <div class="header-left">
+                    <button id="consultar" class="big">Consultar</button>
+                </div>
+                <div class="header-right">
+                    <button id="historial" class="big">Historial</button>
+                </div>
+            </div>
+            <div class="content">
+                <div id="empty-container" class="empty d-none">
+                    Selecciona la accion a realizar
+                </div>
+
+                <form method="POST">
+                    <div id="search-container" class="search d-none">
+                        <div class="search-left">
+                            <div class="search-left-left">
+                                <p>Tipo de consulta</p>
+                                <button id="curp-filter" class="small">CURP</button>
+                            </div>
+                            <div class="search-left-right">
+                                <p>Tipo Persona</p>
+                                <button id="fisica-filter" class="small">Fisica</button>
+                            </div>
+                        </div>
+                        <div class="search-right">
+                            <p>Ingresa caracteres</p>
+                            <input name="query-search" type="text" />
+                            <input id="type-search" name="type-search" type="hidden" value="{{ type_search }}" />
+                        </div>
+                    </div>
+                    <div id="search-container2" class="actions d-none">
+                        <button name="search" type="submit" class="small">Buscar</button>
+                    </div>
+                </form>
+
+                <div id="data-container" class="table-data d-none">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading space-between" >
+                        {% set costo_t = pagination.total * costo_u %}
+                        <b>Mis constancias ({{pagination.total}} actas x ${{costo_u}} = {{ "${:,.2f}".format(costo_t) }})</b>
+                    </div>
+
+                    {# <a href="{{ url_for('sat.download_constancias') }}" download class="panel-heading space-between" > #}
+                    {# <button>
+                        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                    </button> #}
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Asesor</th>
+                                <th>Nombre</th>
+                                <th>CURP/RFC</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for constancia in pagination.items %}
+                                <tr>
+                                    <td>{{ constancia.owner }}</td>
+                                    {# <td>{{ constancia.group }}</td> #}
+                                    <td>{{ constancia.name if constancia.name else "" }}</td>
+                                    <td>
+                                        {% if constancia.rfc %}
+                                            <span>{{ constancia.rfc }}</span>
+                                        {% else %}
+                                            <span>{{ constancia.curp }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if constancia.tipo == "1" %}
+                                            <span>Persona fisica</span>
+                                        {% else %}
+                                            <span>Persona moral<span>
+                                        {% endif %}
+                                    </td>
+                                    {% if constancia.date %}
+                                        {% set date = constancia.date - diferencia %}
+                                        <td>{{ date.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+                                    {% else %}
+                                        <td></td>
+                                    {% endif %}
+                                    <td style="text-align: center;"> 
+                                        <span>{{ constancia.state }}</span><br>
+                                        {% if constancia.file_url %}
+                                            <form method="post" action="{{ url_for('sat.download_constancia') }}" id="form_file_download">
+                                                <input type="hidden" name="file_url" value="{{ constancia.file_url }}">
+                                                <button type="submit">
+                                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                </button>
+                                            </form>
+                                        {% endif %}
+                                        <form method="GET" action="{{ url_for('sat.request_constancia') }}">
+                                            <input type="hidden" name="rfc" value="{{ constancia.rfc }}">
+                                            <input type="hidden" name="curp" value="{{ constancia.curp }}">
+                                            <input type="hidden" name="tipo" value="{{ constancia.tipo }}">
+                                            <button type="submit">
+                                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            </button>
+                                        </form> 
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include "pagination.html.jinja" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        /* $('#tipo').on("change", ({ target:{value} })=>{
+            if(value == '2') {
+                $('#curp').parent().hide();
+            } else {
+                $('#curp').parent().show();
+            }
+        }); */
+    </script>
+    <script src="/static/js/sat_login.js"></script>
+{% endblock scripts %}

@@ -1,0 +1,43 @@
+{% extends "base.html.jinja" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    {{ super() }} Constancia
+{% endblock title %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock head %}
+
+{% block navbar %}
+    {% include "navbar2.html.jinja" %}
+{% endblock navbar %}
+
+{% block content %}
+    <div class="center-vertical">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 shadow-box uppercase">
+                    <h1>Constancia</h1>
+                    {{ super() }}
+                    {{ wtf.quick_form(constancia_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $('#tipo').on("change", ({ target:{value} })=>{
+            if(value == '2') {
+                $('#curp').parent().hide();
+            } else {
+                $('#curp').parent().show();
+            }
+        });
+    </script>
+    <script src="/static/js/sat_login.js"></script>
+{% endblock scripts %}

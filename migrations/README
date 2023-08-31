@@ -1,0 +1,4 @@
+Single-database configuration for Flask.
+
+flask db migrate -m "Adding grupo and name to constancias."
+flask db upgrade

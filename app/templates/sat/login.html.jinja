@@ -1,0 +1,39 @@
+{% extends "base.html.jinja" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+    {{ super() }}
+    <link href="/static/css/main.css" rel="stylesheet" >
+{% endblock head %}
+
+{% block title %}
+    {{ super() }} SAT login
+{% endblock title %}
+
+{% block navbar %}
+    {% include "navbar2.html.jinja" %}
+{% endblock navbar %}
+
+{% block content %}
+    <div class="center-vertical">
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3 shadow-box">
+                <h1>SAT login</h1>
+                {{ super() }}
+                {% if not logged %}
+                    {{ wtf.quick_form( sat_login_form ) }}
+                
+                {% else %}
+                    <h1>Ya estas loggeado</h1>
+                    <a href="{{ url_for('robot.sat_close_session') }}">Cerrar sesión</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/js/sat_login.js"></script>
+{% endblock scripts %}
